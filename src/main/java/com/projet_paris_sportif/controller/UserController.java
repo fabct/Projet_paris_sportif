@@ -6,7 +6,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
-public class UserController {
+public class UserController extends Exception {
 
     @Autowired
     private UserService userService;
@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user")
-    public Boolean deleteUser(@RequestParam Integer id) {
+    public User deleteUser(@RequestParam Integer id) throws ResourceNotFoundException {
         return userService.deleteUser(id);
     }
 }

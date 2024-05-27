@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.service;
 
+import com.projet_paris_sportif.controller.ResourceNotFoundException;
 import com.projet_paris_sportif.model.InfUser;
 import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.repository.UserRepository;
@@ -18,10 +19,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public Boolean deleteUser(Integer id) {
+    public User deleteUser(Integer id) throws ResourceNotFoundException {
         User userDelete = userRepository.getReferenceById(id);
         userRepository.delete(userDelete);
-        return userRepository.findById(id).isPresent();
+        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User deleted !"));
     }
 
     public User getUser(Integer id) {
