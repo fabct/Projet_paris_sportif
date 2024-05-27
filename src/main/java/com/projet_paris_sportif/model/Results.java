@@ -8,6 +8,6 @@ import lombok.Data;
 public class Results extends Game{
 	private Integer victeam1;
 	private Integer victeam2;
-	private Integer tie;
+	private Double tie;
 	
 }
