@@ -3,8 +3,6 @@ package com.projet_paris_sportif.controller;
 import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
 
 @RestController
