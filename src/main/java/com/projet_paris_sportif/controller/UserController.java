@@ -22,7 +22,7 @@ public class UserController {
     }
 
     @DeleteMapping("/user")
-    public User deleteUser(@RequestParam Integer id) {
+    public Boolean deleteUser(@RequestParam Integer id) {
         return userService.deleteUser(id);
     }
 }

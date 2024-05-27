@@ -18,11 +18,10 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User deleteUser(Integer id) {
+    public Boolean deleteUser(Integer id) {
         User userDelete = userRepository.getReferenceById(id);
         userRepository.delete(userDelete);
-        InfUser infUser = infUserService.deleteInfUser(id);
-        return userDelete;
+        return userRepository.findById(id).isPresent();
     }
 
     public User getUser(Integer id) {
