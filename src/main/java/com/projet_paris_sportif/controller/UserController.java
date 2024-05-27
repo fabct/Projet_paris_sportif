@@ -21,6 +21,11 @@ public class UserController extends Exception {
         return userService.createUser(user);
     }
 
+    @PostMapping("/login")
+    public Boolean login(@RequestParam String username, @RequestParam String password){
+       return userService.loginUser(username,password);
+    }
+
     @DeleteMapping("/user")
     public User deleteUser(@RequestParam Integer id) throws ResourceNotFoundException {
         return userService.deleteUser(id);
