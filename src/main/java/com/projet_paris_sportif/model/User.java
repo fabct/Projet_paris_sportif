@@ -6,15 +6,16 @@ import lombok.Data;
 
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
 @Entity
 @Data
-public class User extends InfUser{
-	
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class User extends InfUser {
+
 	private Integer solde;
-	
+
 	@OneToMany(mappedBy = "user")
-    private Set<Bet> sum;
-	
-	
+	private Set<Bet> sum;
+
 }
