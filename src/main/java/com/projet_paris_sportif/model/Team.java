@@ -3,19 +3,16 @@ package com.projet_paris_sportif.model;
 import java.util.List;
 import java.util.Set;
 
-import jakarta.persistence.Entity;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.Data;
 
 @Entity
 @Data
 public class Team {
 	@Id
+	@GeneratedValue(strategy = GenerationType.AUTO)
 	private String idTeam;
+
 	private String teamname;
 	//association
 	@ManyToMany
