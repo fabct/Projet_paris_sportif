@@ -4,6 +4,6 @@ import com.projet_paris_sportif.model.InfUser;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface InfUserRepository extends JpaRepository<InfUser, String>{
+public interface InfUserRepository extends JpaRepository<InfUser, Integer>{
 
 }

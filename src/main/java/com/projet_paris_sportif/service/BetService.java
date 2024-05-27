@@ -27,7 +27,7 @@ public class BetService {
         return betRepository.getReferenceById(id);
     }
 
-    public List<Bet> getUserBets(String userId) {
+    public List<Bet> getUserBets(Integer userId) {
         return betRepository.findAllByUserId(userId);
     }
 }

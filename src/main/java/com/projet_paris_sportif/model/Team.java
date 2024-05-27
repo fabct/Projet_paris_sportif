@@ -11,7 +11,7 @@ import lombok.Data;
 public class Team {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String idTeam;
+	private Integer idTeam;
 
 	private String teamname;
 	//association

@@ -11,7 +11,7 @@ import lombok.Data;
 public class InfUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String id;
+	private Integer id;
 
 	private String name;
 

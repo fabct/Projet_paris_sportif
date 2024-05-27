@@ -18,14 +18,14 @@ public class UserService {
         return userRepository.save(user);
     }
 
-    public User deleteUser(String id) {
+    public User deleteUser(Integer id) {
         User userDelete = userRepository.getReferenceById(id);
         userRepository.delete(userDelete);
         InfUser infUser = infUserService.deleteInfUser(id);
         return userDelete;
     }
 
-    public User getUser(String id) {
+    public User getUser(Integer id) {
         return userRepository.getReferenceById(id);
     }
 }

@@ -16,9 +16,9 @@ public class BetKey implements Serializable {
 	private static final long serialVersionUID = 1L;
 
 	@Column(name = "id_user")
-    private String idUser;
+    private Integer idUser;
 
     @Column(name = "id_match")
-    private String idMatch;
+    private Integer idMatch;
 
 }

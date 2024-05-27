@@ -16,13 +16,13 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
-    public Team deleteTeam(String id) {
+    public Team deleteTeam(Integer id) {
         Team teamDeleted = teamRepository.getReferenceById(id);
         teamRepository.delete(teamDeleted);
         return teamDeleted;
     }
 
-    public Team getTeam(String id) {
+    public Team getTeam(Integer id) {
         return teamRepository.getReferenceById(id);
     }
 

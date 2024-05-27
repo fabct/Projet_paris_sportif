@@ -9,5 +9,5 @@ import java.util.List;
 
 @Repository
 public interface BetRepository extends JpaRepository<Bet, BetKey>{
-    List<Bet> findAllByUserId(String userId);
+    List<Bet> findAllByUserId(Integer userId);
 }

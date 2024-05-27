@@ -17,7 +17,7 @@ public class GameService {
         return gameRepository.findAll();
     }
 
-    public Game getGame(String id) {
+    public Game getGame(Integer id) {
         return gameRepository.getReferenceById(id);
     }
 
@@ -25,7 +25,7 @@ public class GameService {
         return gameRepository.save(game);
     }
 
-    public Game deleteGame(String id) {
+    public Game deleteGame(Integer id) {
         Game gameDelete = gameRepository.getReferenceById(id);
         gameRepository.delete(gameDelete);
         return gameDelete;

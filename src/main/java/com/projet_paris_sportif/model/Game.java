@@ -12,7 +12,7 @@ import java.util.Set;
 public class Game{
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private String idMatch;
+	private Integer idMatch;
 
 	private Double sidevic1;
 

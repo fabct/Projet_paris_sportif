@@ -17,7 +17,7 @@ public class InfUserService {
         return repository.save(infUser);
     }
 
-    public InfUser deleteInfUser(String id) {
+    public InfUser deleteInfUser(Integer id) {
         InfUser infUser = repository.findById(id).orElse(null);
         repository.delete(infUser);
         return infUser;

@@ -4,6 +4,6 @@ import com.projet_paris_sportif.model.Game;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 
-public interface GameRepository extends JpaRepository<Game, String>{
+public interface GameRepository extends JpaRepository<Game, Integer>{
 
 }

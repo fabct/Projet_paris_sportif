@@ -16,7 +16,7 @@ public class ResultsService {
         return resultsRepository.save(results);
     }
 
-    public Results getResult(String id) {
+    public Results getResult(Integer id) {
         return resultsRepository.getReferenceById(id);
     }
 
@@ -24,7 +24,7 @@ public class ResultsService {
         return resultsRepository.findAll();
     }
 
-    public Results deleteResult(String id) {
+    public Results deleteResult(Integer id) {
 
         Results resultsDeleted = resultsRepository.getReferenceById(id);
         resultsRepository.deleteById(id);
