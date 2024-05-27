@@ -19,7 +19,7 @@ public class InfUser {
 
 	private String password;
 
-	private Integer birthyear;
+	private String birthyear;
 
 	private String role;
 }
