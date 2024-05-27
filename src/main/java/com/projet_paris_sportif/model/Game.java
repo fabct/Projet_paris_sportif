@@ -6,10 +6,13 @@ import lombok.Data;
 import java.util.List;
 import java.util.Set;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 @Entity
 @Data
 @Embeddable
-public class Game{
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
+public class Game {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
 	private Integer idMatch;
@@ -19,15 +22,12 @@ public class Game{
 	private Double sidevic2;
 
 	private Double tie;
-	
+
 	@ManyToMany
-	@JoinTable(name = "TeamMatch",joinColumns = @JoinColumn(name = "id_match"),
-	inverseJoinColumns = @JoinColumn(name = "id_team"))
+	@JoinTable(name = "TeamMatch", joinColumns = @JoinColumn(name = "id_match"), inverseJoinColumns = @JoinColumn(name = "id_team"))
 	private List<Team> teams;
 
-	
 	@OneToMany(mappedBy = "match")
-    private Set<Bet> sum;
-	
-	
+	private Set<Bet> sum;
+
 }

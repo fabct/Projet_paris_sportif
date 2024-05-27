@@ -1,5 +1,7 @@
 package com.projet_paris_sportif.model;
 
+import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
+
 import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
@@ -8,6 +10,7 @@ import lombok.Data;
 
 @Entity
 @Data
+@JsonIgnoreProperties({ "hibernateLazyInitializer", "handler" })
 public class InfUser {
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
