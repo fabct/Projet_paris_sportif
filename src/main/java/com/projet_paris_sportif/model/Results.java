@@ -17,7 +17,7 @@ public class Results {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.AUTO)
-	private Integer id;
+	private Integer idResult;
 
 	private Boolean resultVicTeam1;
 	private Boolean resultVicTeam2;
