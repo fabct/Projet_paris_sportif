@@ -6,8 +6,8 @@ import lombok.Data;
 @Entity
 @Data
 public class Results extends Game{
-	private Boolean victeam1;
-	private Boolean victeam2;
-	private Boolean tie;
+	private Boolean resultVicTeam1;
+	private Boolean resultVicTeam2;
+	private Boolean resultTie;
 	
 }
