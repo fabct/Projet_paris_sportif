@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.service;
 
+import com.projet_paris_sportif.controller.ResourceNotFoundException;
 import com.projet_paris_sportif.model.Bet;
 import com.projet_paris_sportif.model.BetKey;
 import com.projet_paris_sportif.repository.BetRepository;
@@ -17,10 +18,10 @@ public class BetService {
         return betRepository.save(bet);
     }
 
-    public Bet cancelBet(BetKey betKey) {
+    public Bet cancelBet(BetKey betKey) throws ResourceNotFoundException {
         Bet betDeleted = betRepository.getReferenceById(betKey);
         betRepository.delete(betDeleted);
-        return betDeleted;
+        return betRepository.findById(betKey).orElseThrow(() -> new ResourceNotFoundException("Bet Canceled !"));
     }
 
     public Bet getBet(BetKey id) {

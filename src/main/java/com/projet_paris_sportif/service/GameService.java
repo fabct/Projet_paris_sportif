@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.service;
 
+import com.projet_paris_sportif.controller.ResourceNotFoundException;
 import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.repository.GameRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -25,9 +26,9 @@ public class GameService {
         return gameRepository.save(game);
     }
 
-    public Game deleteGame(Integer id) {
+    public Game deleteGame(Integer id) throws ResourceNotFoundException {
         Game gameDelete = gameRepository.getReferenceById(id);
         gameRepository.delete(gameDelete);
-        return gameDelete;
+        return gameRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Game deleted !"));
     }
 }

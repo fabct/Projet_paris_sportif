@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.service;
 
+import com.projet_paris_sportif.controller.ResourceNotFoundException;
 import com.projet_paris_sportif.model.InfUser;
 import com.projet_paris_sportif.repository.InfUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -17,9 +18,9 @@ public class InfUserService {
         return repository.save(infUser);
     }
 
-    public InfUser deleteInfUser(Integer id) {
+    public InfUser deleteInfUser(Integer id) throws ResourceNotFoundException {
         InfUser infUser = repository.findById(id).orElse(null);
         repository.delete(infUser);
-        return infUser;
+        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User Info deleted !"));
     }
 }

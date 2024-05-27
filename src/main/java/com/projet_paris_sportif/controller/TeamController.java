@@ -8,7 +8,7 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class TeamController {
+public class TeamController extends Exception{
 
     @Autowired
     public TeamService teamService;
@@ -29,7 +29,7 @@ public class TeamController {
     }
 
     @DeleteMapping("/team")
-    public Team deleteTeam(@RequestParam Integer id){
+    public Team deleteTeam(@RequestParam Integer id) throws ResourceNotFoundException{
         return teamService.deleteTeam(id);
     }
 }

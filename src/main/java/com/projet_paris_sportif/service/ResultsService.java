@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.service;
 
+import com.projet_paris_sportif.controller.ResourceNotFoundException;
 import com.projet_paris_sportif.model.Results;
 import com.projet_paris_sportif.repository.ResultsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -24,10 +25,10 @@ public class ResultsService {
         return resultsRepository.findAll();
     }
 
-    public Results deleteResult(Integer id) {
+    public Results deleteResult(Integer id)  throws ResourceNotFoundException {
 
         Results resultsDeleted = resultsRepository.getReferenceById(id);
         resultsRepository.deleteById(id);
-        return resultsDeleted;
+        return resultsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Results deleted !"));
     }
 }

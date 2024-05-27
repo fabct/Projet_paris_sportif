@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.service;
 
+import com.projet_paris_sportif.controller.ResourceNotFoundException;
 import com.projet_paris_sportif.model.Team;
 import com.projet_paris_sportif.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -16,10 +17,10 @@ public class TeamService {
         return teamRepository.save(team);
     }
 
-    public Team deleteTeam(Integer id) {
+    public Team deleteTeam(Integer id) throws ResourceNotFoundException {
         Team teamDeleted = teamRepository.getReferenceById(id);
         teamRepository.delete(teamDeleted);
-        return teamDeleted;
+        return teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Team Deleted !"));
     }
 
     public Team getTeam(Integer id) {

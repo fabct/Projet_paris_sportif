@@ -12,9 +12,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-    @Autowired
-    private InfUserService infUserService;
-
     public User createUser(User user) {
         return userRepository.save(user);
     }
