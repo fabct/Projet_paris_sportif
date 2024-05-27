@@ -30,4 +30,6 @@ public class Game {
 	@OneToMany(mappedBy = "match")
 	private Set<Bet> sum;
 
+	@OneToOne(mappedBy = "game")
+	private Results result;
 }
