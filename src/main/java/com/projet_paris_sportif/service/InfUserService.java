@@ -6,21 +6,21 @@ import com.projet_paris_sportif.repository.InfUserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.util.Objects;
-
 @Service
 public class InfUserService {
 
     @Autowired
-    private InfUserRepository repository;
+    private InfUserRepository infUserRepository;
 
     public InfUser updateInfUser(InfUser infUser) {
-        return repository.save(infUser);
+        return infUserRepository.save(infUser);
     }
 
     public InfUser deleteInfUser(Integer id) throws ResourceNotFoundException {
-        InfUser infUser = repository.findById(id).orElse(null);
-        repository.delete(infUser);
-        return repository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User Info deleted !"));
+        InfUser infUser = infUserRepository.getReferenceById(id);
+        infUserRepository.delete(infUser);
+        return infUserRepository.findById(id).orElseThrow(
+                () -> new ResourceNotFoundException(
+                        "Les informations de l'utilisateur n'existent pas ou ont bien été supprimées !"));
     }
 }

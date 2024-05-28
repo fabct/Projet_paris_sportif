@@ -9,23 +9,23 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class BetController extends Exception{
+public class BetController extends Exception {
 
     @Autowired
     private BetService betService;
 
     @GetMapping("/userBets")
-    public List<Bet> getUserBet(@RequestParam Integer userId){
+    public List<Bet> getUserBet(@RequestParam Integer userId) {
         return betService.getUserBets(userId);
     }
 
     @GetMapping("/bet")
-    public Bet getBet(@RequestParam BetKey id){
+    public Bet getBet(@RequestParam BetKey id) throws ResourceNotFoundException {
         return betService.getBet(id);
     }
 
     @PostMapping("/bet")
-    public Bet createBet(@RequestBody Bet bet){
+    public Bet createBet(@RequestBody Bet bet) {
         return betService.createBet(bet);
     }
 

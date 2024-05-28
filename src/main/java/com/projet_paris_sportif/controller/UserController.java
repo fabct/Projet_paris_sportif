@@ -12,7 +12,7 @@ public class UserController extends Exception {
     private UserService userService;
 
     @GetMapping("/user")
-    public User getUser(@RequestParam Integer id) {
+    public User getUser(@RequestParam Integer id) throws ResourceNotFoundException {
         return userService.getUser(id);
     }
 
@@ -22,8 +22,9 @@ public class UserController extends Exception {
     }
 
     @PostMapping("/login")
-    public Boolean login(@RequestParam String username, @RequestParam String password){
-       return userService.loginUser(username,password);
+    public Boolean login(@RequestParam String username, @RequestParam String password)
+            throws ResourceNotFoundException {
+        return userService.loginUser(username, password);
     }
 
     @DeleteMapping("/user")

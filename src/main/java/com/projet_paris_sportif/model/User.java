@@ -17,5 +17,4 @@ public class User extends InfUser {
 
 	@OneToMany(mappedBy = "user")
 	private Set<Bet> sum;
-
 }

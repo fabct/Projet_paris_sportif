@@ -17,18 +17,19 @@ public class ResultsService {
         return resultsRepository.save(results);
     }
 
-    public Results getResult(Integer id) {
-        return resultsRepository.getReferenceById(id);
+    public Results getResult(Integer id) throws ResourceNotFoundException {
+        return resultsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ce résultat n'existe pas !"));
     }
 
     public List<Results> getAllResults() {
         return resultsRepository.findAll();
     }
 
-    public Results deleteResult(Integer id)  throws ResourceNotFoundException {
-
-        Results resultsDeleted = resultsRepository.getReferenceById(id);
-        resultsRepository.deleteById(id);
-        return resultsRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Results deleted !"));
+    public Results deleteResult(Integer id) throws ResourceNotFoundException {
+        Results resultDelete = resultsRepository.getReferenceById(id);
+        resultsRepository.delete(resultDelete);
+        return resultsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ce résultat n'existe pas ou a bien été supprimé !"));
     }
 }

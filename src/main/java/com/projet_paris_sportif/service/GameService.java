@@ -18,8 +18,9 @@ public class GameService {
         return gameRepository.findAll();
     }
 
-    public Game getGame(Integer id) {
-        return gameRepository.getReferenceById(id);
+    public Game getGame(Integer id) throws ResourceNotFoundException {
+        return gameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ce match n'existe pas !"));
     }
 
     public Game createGame(Game game) {
@@ -29,6 +30,7 @@ public class GameService {
     public Game deleteGame(Integer id) throws ResourceNotFoundException {
         Game gameDelete = gameRepository.getReferenceById(id);
         gameRepository.delete(gameDelete);
-        return gameRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Game deleted !"));
+        return gameRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ce match n'existe pas ou a bien été supprimé !"));
     }
 }

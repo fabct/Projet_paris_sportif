@@ -8,28 +8,28 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class GameController extends Exception{
+public class GameController extends Exception {
 
     @Autowired
     private GameService gameService;
 
     @GetMapping("/allGames")
-    public List<Game> getAllGame(){
+    public List<Game> getAllGame() {
         return gameService.getAllGame();
     }
 
-    @GetMapping("/games")
-    public Game getGame(@RequestParam Integer id){
+    @GetMapping("/game")
+    public Game getGame(@RequestParam Integer id) throws ResourceNotFoundException {
         return gameService.getGame(id);
     }
 
     @PostMapping("/game")
-    public Game createGame(@RequestBody Game game){
+    public Game createGame(@RequestBody Game game) {
         return gameService.createGame(game);
     }
 
     @DeleteMapping("/game")
-    public Game deleteGame(Integer id) throws ResourceNotFoundException {
+    public Game deleteGame(@RequestParam Integer id) throws ResourceNotFoundException {
         return gameService.deleteGame(id);
     }
 }

@@ -20,11 +20,14 @@ public class TeamService {
     public Team deleteTeam(Integer id) throws ResourceNotFoundException {
         Team teamDeleted = teamRepository.getReferenceById(id);
         teamRepository.delete(teamDeleted);
-        return teamRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Team Deleted !"));
+        return teamRepository.findById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Cette équipe n'existe pas ou a bien été supprimée !"));
     }
 
-    public Team getTeam(Integer id) {
-        return teamRepository.getReferenceById(id);
+    public Team getTeam(Integer id) throws ResourceNotFoundException {
+        return teamRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cette équipe n'existe pas !"));
     }
 
     public List<Team> getAllTeams() {

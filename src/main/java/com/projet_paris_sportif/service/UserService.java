@@ -13,7 +13,6 @@ public class UserService {
     @Autowired
     private UserRepository userRepository;
 
-
     public User createUser(User user) {
         return userRepository.save(user);
     }
@@ -21,20 +20,19 @@ public class UserService {
     public User deleteUser(Integer id) throws ResourceNotFoundException {
         User userDelete = userRepository.getReferenceById(id);
         userRepository.delete(userDelete);
-        return userRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("User deleted !"));
+        return userRepository.findById(id)
+                .orElseThrow(
+                        () -> new ResourceNotFoundException("Cet utilisateur n'existe pas ou a bien été supprimé !"));
     }
 
-    public User getUser(Integer id) {
-        return userRepository.getReferenceById(id);
+    public User getUser(Integer id) throws ResourceNotFoundException {
+        return userRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cet utilisateur n'existe pas !"));
     }
 
-    public boolean loginUser(String username, String password){
-        User logUser = userRepository.findByName(username);
-        if(logUser == null){
-            return false;
-        }
-        else{
-            return Objects.equals(password, logUser.getPassword());
-        }
+    public boolean loginUser(String username, String password) throws ResourceNotFoundException {
+        User logUser = userRepository.findByName(username)
+                .orElseThrow(() -> new ResourceNotFoundException("Ce pseudo ne correspond pas à un utilisateur !"));
+        return Objects.equals(password, logUser.getPassword());
     }
 }

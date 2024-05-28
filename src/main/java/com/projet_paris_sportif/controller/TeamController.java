@@ -8,18 +8,18 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-public class TeamController extends Exception{
+public class TeamController extends Exception {
 
     @Autowired
     public TeamService teamService;
 
     @GetMapping("/allTeams")
-    public List<Team> getAllTeams(){
+    public List<Team> getAllTeams() {
         return teamService.getAllTeams();
     }
 
     @GetMapping("/team")
-    public Team getTeam(@RequestParam Integer id){
+    public Team getTeam(@RequestParam Integer id) throws ResourceNotFoundException {
         return teamService.getTeam(id);
     }
 
@@ -29,7 +29,7 @@ public class TeamController extends Exception{
     }
 
     @DeleteMapping("/team")
-    public Team deleteTeam(@RequestParam Integer id) throws ResourceNotFoundException{
+    public Team deleteTeam(@RequestParam Integer id) throws ResourceNotFoundException {
         return teamService.deleteTeam(id);
     }
 }

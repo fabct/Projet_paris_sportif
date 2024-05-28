@@ -21,11 +21,12 @@ public class BetService {
     public Bet cancelBet(BetKey betKey) throws ResourceNotFoundException {
         Bet betDeleted = betRepository.getReferenceById(betKey);
         betRepository.delete(betDeleted);
-        return betRepository.findById(betKey).orElseThrow(() -> new ResourceNotFoundException("Bet Canceled !"));
+        return betRepository.findById(betKey)
+                .orElseThrow(() -> new ResourceNotFoundException("Ce pari n'existe pas ou a bien été supprimé !"));
     }
 
-    public Bet getBet(BetKey id) {
-        return betRepository.getReferenceById(id);
+    public Bet getBet(BetKey id) throws ResourceNotFoundException {
+        return betRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ce pari n'existe pas !"));
     }
 
     public List<Bet> getUserBets(Integer userId) {
