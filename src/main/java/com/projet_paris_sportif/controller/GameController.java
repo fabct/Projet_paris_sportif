@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.controller;
 
+import com.projet_paris_sportif.dto.GameDto;
 import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +15,22 @@ public class GameController extends Exception {
     private GameService gameService;
 
     @GetMapping("/allGames")
-    public List<Game> getAllGame() {
+    public List<GameDto> getAllGame() {
         return gameService.getAllGame();
     }
 
     @GetMapping("/game")
-    public Game getGame(@RequestParam Integer id) throws ResourceNotFoundException {
+    public GameDto getGame(@RequestParam Integer id) throws ResourceNotFoundException {
         return gameService.getGame(id);
     }
 
     @PostMapping("/game")
-    public Game createGame(@RequestBody Game game) {
+    public GameDto createGame(@RequestBody Game game) {
         return gameService.createGame(game);
     }
 
     @DeleteMapping("/game")
-    public Game deleteGame(@RequestParam Integer id) throws ResourceNotFoundException {
+    public GameDto deleteGame(@RequestParam Integer id) throws ResourceNotFoundException {
         return gameService.deleteGame(id);
     }
 }

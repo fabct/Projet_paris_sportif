@@ -1,35 +1,72 @@
 package com.projet_paris_sportif.service;
 
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
+import com.projet_paris_sportif.dto.BetDto;
+import com.projet_paris_sportif.dto.GameDto;
+import com.projet_paris_sportif.dto.GameTeamDto;
 import com.projet_paris_sportif.model.Bet;
 import com.projet_paris_sportif.model.BetKey;
+import com.projet_paris_sportif.model.Game;
+import com.projet_paris_sportif.model.Team;
 import com.projet_paris_sportif.repository.BetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.stream.Collectors;
 
 @Service
 public class BetService {
     @Autowired
     private BetRepository betRepository;
 
-    public Bet createBet(Bet bet) {
-        return betRepository.save(bet);
+    public BetDto createBet(Bet bet) {
+        return convertBetToDto(betRepository.save(bet));
     }
 
-    public Bet cancelBet(BetKey betKey) throws ResourceNotFoundException {
+    public BetDto cancelBet(BetKey betKey) throws ResourceNotFoundException {
         Bet betDeleted = betRepository.getReferenceById(betKey);
         betRepository.delete(betDeleted);
-        return betRepository.findById(betKey)
-                .orElseThrow(() -> new ResourceNotFoundException("Ce pari n'existe pas ou a bien été supprimé !"));
+        return convertBetToDto(betRepository.findById(betKey)
+                .orElseThrow(() -> new ResourceNotFoundException("Ce pari n'existe pas ou a bien été supprimé !")));
     }
 
-    public Bet getBet(BetKey id) throws ResourceNotFoundException {
-        return betRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ce pari n'existe pas !"));
+    public BetDto getBet(BetKey id) throws ResourceNotFoundException {
+        return convertBetToDto(
+                betRepository.findById(id).orElseThrow(() -> new ResourceNotFoundException("Ce pari n'existe pas !")));
     }
 
-    public List<Bet> getUserBets(Integer userId) {
-        return betRepository.findAllByUserId(userId);
+    public List<BetDto> getUserBets(Integer userId) {
+        return betRepository.findAllByUserId(userId).stream()
+                .map(this::convertBetToDto)
+                .collect(Collectors.toList());
+    }
+
+    public BetDto convertBetToDto(Bet b) {
+        return BetDto.builder()
+                .id(b.getId())
+                .user(b.getUser())
+                .game(convertGameToDto(b.getMatch()))
+                .sum(b.getSum())
+                .build();
+    }
+
+    public GameDto convertGameToDto(Game g) {
+        return GameDto.builder()
+                .idMatch(g.getIdMatch())
+                .sidevic1(g.getSidevic1())
+                .sidevic2(g.getSidevic2())
+                .tie(g.getTie())
+                .teams(g.getTeams().stream().map(this::convertTeamBetToDto).collect(Collectors.toList()))
+                .sum(g.getSum())
+                .result(g.getResult())
+                .build();
+    }
+
+    public GameTeamDto convertTeamBetToDto(Team t) {
+        return GameTeamDto.builder()
+                .idTeam(t.getIdTeam())
+                .teamname(t.getTeamname())
+                .build();
     }
 }

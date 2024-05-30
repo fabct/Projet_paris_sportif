@@ -1,7 +1,6 @@
 package com.projet_paris_sportif.model;
 
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
