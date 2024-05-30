@@ -3,10 +3,12 @@ package com.projet_paris_sportif.service;
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
 import com.projet_paris_sportif.dto.BetDto;
 import com.projet_paris_sportif.dto.GameDto;
+import com.projet_paris_sportif.dto.GameResultsDto;
 import com.projet_paris_sportif.dto.GameTeamDto;
 import com.projet_paris_sportif.model.Bet;
 import com.projet_paris_sportif.model.BetKey;
 import com.projet_paris_sportif.model.Game;
+import com.projet_paris_sportif.model.Results;
 import com.projet_paris_sportif.model.Team;
 import com.projet_paris_sportif.repository.BetRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -59,7 +61,7 @@ public class BetService {
                 .tie(g.getTie())
                 .teams(g.getTeams().stream().map(this::convertTeamBetToDto).collect(Collectors.toList()))
                 .sum(g.getSum())
-                .result(g.getResult())
+                .result(convertGameResultsToDto(g.getResult()))
                 .build();
     }
 
@@ -67,6 +69,17 @@ public class BetService {
         return GameTeamDto.builder()
                 .idTeam(t.getIdTeam())
                 .teamname(t.getTeamname())
+                .build();
+    }
+
+    public GameResultsDto convertGameResultsToDto(Results r) {
+        if (r == null)
+            return null;
+        return GameResultsDto.builder()
+                .idResult(r.getIdResult())
+                .resultVicTeam1(r.getResultVicTeam1())
+                .resultVicTeam2(r.getResultVicTeam2())
+                .resultTie(r.getResultTie())
                 .build();
     }
 }

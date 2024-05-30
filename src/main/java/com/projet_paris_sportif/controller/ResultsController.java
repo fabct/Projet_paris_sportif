@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.controller;
 
+import com.projet_paris_sportif.dto.ResultsDto;
 import com.projet_paris_sportif.model.Results;
 import com.projet_paris_sportif.service.ResultsService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -14,22 +15,22 @@ public class ResultsController extends Exception {
     private ResultsService resultsService;
 
     @GetMapping("/allResults")
-    public List<Results> getAllResults() {
+    public List<ResultsDto> getAllResults() {
         return resultsService.getAllResults();
     }
 
     @GetMapping("/results")
-    public Results getResults(@RequestParam Integer id) throws ResourceNotFoundException {
+    public ResultsDto getResults(@RequestParam Integer id) throws ResourceNotFoundException {
         return resultsService.getResult(id);
     }
 
     @PostMapping("/results")
-    public Results createResult(@RequestBody Results results) {
+    public ResultsDto createResult(@RequestBody Results results) {
         return resultsService.createResult(results);
     }
 
     @DeleteMapping("/results")
-    public Results deleteResults(@RequestParam Integer id) throws ResourceNotFoundException {
+    public ResultsDto deleteResults(@RequestParam Integer id) throws ResourceNotFoundException {
         return resultsService.deleteResult(id);
     }
 

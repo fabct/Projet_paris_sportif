@@ -1,7 +1,8 @@
 package com.projet_paris_sportif.service;
 
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
-import com.projet_paris_sportif.dto.TeamDto;
+import com.projet_paris_sportif.dto.CreateTeamDto;
+import com.projet_paris_sportif.dto.GetTeamDto;
 import com.projet_paris_sportif.dto.TeamGameDto;
 import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.model.Team;
@@ -17,29 +18,36 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public TeamDto createTeam(Team team) {
-        return convertTeamToDto(teamRepository.save(team));
+    public CreateTeamDto createTeam(Team team) {
+        return convertCreateTeamToDto(teamRepository.save(team));
     }
 
-    public TeamDto deleteTeam(Integer id) throws ResourceNotFoundException {
+    public GetTeamDto deleteTeam(Integer id) throws ResourceNotFoundException {
         Team teamDeleted = teamRepository.getReferenceById(id);
         teamRepository.delete(teamDeleted);
-        return convertTeamToDto(teamRepository.findById(id)
+        return convertGetTeamToDto(teamRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Cette équipe n'existe pas ou a bien été supprimée !")));
     }
 
-    public TeamDto getTeam(Integer id) throws ResourceNotFoundException {
-        return convertTeamToDto(teamRepository.findById(id)
+    public GetTeamDto getTeam(Integer id) throws ResourceNotFoundException {
+        return convertGetTeamToDto(teamRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Cette équipe n'existe pas !")));
     }
 
-    public List<TeamDto> getAllTeams() {
-        return teamRepository.findAll().stream().map(this::convertTeamToDto).collect(Collectors.toList());
+    public List<GetTeamDto> getAllTeams() {
+        return teamRepository.findAll().stream().map(this::convertGetTeamToDto).collect(Collectors.toList());
     }
 
-    public TeamDto convertTeamToDto(Team t) {
-        return TeamDto.builder()
+    public CreateTeamDto convertCreateTeamToDto(Team t) {
+        return CreateTeamDto.builder()
+                .idTeam(t.getIdTeam())
+                .teamname(t.getTeamname())
+                .build();
+    }
+
+    public GetTeamDto convertGetTeamToDto(Team t) {
+        return GetTeamDto.builder()
                 .idTeam(t.getIdTeam())
                 .teamname(t.getTeamname())
                 .matchs(t.getMatchs().stream().map(this::convertTeamGameToDto).collect(Collectors.toList()))
