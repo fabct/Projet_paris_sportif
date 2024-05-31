@@ -7,7 +7,7 @@ import org.springframework.web.bind.annotation.*;
 
 @CrossOrigin(origins = "*")
 @RestController()
-public class InfUserController extends Exception{
+public class InfUserController extends Exception {
     @Autowired
     private InfUserService infUserService;
 
