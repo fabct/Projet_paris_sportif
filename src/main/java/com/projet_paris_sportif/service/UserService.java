@@ -40,4 +40,13 @@ public class UserService {
             return logUser.getId();
         return 0;
     }
+
+    public Integer addFunds(Integer userId, Integer amount) {
+        User user = userRepository.findById(userId).get();
+        Integer solde = user.getSolde();
+        Integer newSolde = solde + amount;
+        user.setSolde(newSolde);
+        userRepository.save(user);
+        return amount;
+    }
 }

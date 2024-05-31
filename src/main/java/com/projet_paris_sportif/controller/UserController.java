@@ -33,4 +33,10 @@ public class UserController extends Exception {
     public User deleteUser(@RequestParam Integer id) throws ResourceNotFoundException {
         return userService.deleteUser(id);
     }
+
+    @PutMapping("/addFunds")
+    public Integer addFunds(@RequestParam Integer userId, @RequestParam Integer amount) {
+        return userService.addFunds(userId, amount);
+    }
+
 }
