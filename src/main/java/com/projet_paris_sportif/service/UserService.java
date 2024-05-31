@@ -1,6 +1,7 @@
 package com.projet_paris_sportif.service;
 
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
+import com.projet_paris_sportif.dto.LoginDto;
 import com.projet_paris_sportif.dto.UserDto;
 import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.repository.UserRepository;
@@ -32,9 +33,11 @@ public class UserService {
                 .orElseThrow(() -> new ResourceNotFoundException("Cet utilisateur n'existe pas !"));
     }
 
-    public boolean loginUser(String username, String password) throws ResourceNotFoundException {
-        User logUser = userRepository.findByName(username)
+    public Integer loginUser(LoginDto login) throws ResourceNotFoundException {
+        User logUser = userRepository.findByName(login.getUsername())
                 .orElseThrow(() -> new ResourceNotFoundException("Ce pseudo ne correspond pas à un utilisateur !"));
-        return Objects.equals(password, logUser.getPassword());
+        if (Objects.equals(login.getPassword(), logUser.getPassword()))
+            return logUser.getId();
+        return 0;
     }
 }

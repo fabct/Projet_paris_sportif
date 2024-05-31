@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.controller;
 
+import com.projet_paris_sportif.dto.LoginDto;
 import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -21,11 +22,11 @@ public class UserController extends Exception {
         return userService.createUser(user);
     }
 
-    @CrossOrigin(origins = "http://127.0.0.1:5500")
+    @CrossOrigin(origins = "*")
     @PostMapping("/login")
-    public Boolean login(@RequestParam String username, @RequestParam String password)
+    public Integer login(@RequestBody LoginDto login)
             throws ResourceNotFoundException {
-        return userService.loginUser(username, password);
+        return userService.loginUser(login);
     }
 
     @DeleteMapping("/user")
