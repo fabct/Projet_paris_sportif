@@ -21,6 +21,6 @@ public class TeamGameDto {
     private Double sidevic1;
     private Double sidevic2;
     private Double tie;
-    private Set<Bet> sum;
+    private List<Bet> sum;
     private Results result;
 }

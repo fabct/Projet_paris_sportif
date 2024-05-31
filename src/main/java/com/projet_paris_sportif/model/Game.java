@@ -4,7 +4,6 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.util.List;
-import java.util.Set;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -28,7 +27,7 @@ public class Game {
 	private List<Team> teams;
 
 	@OneToMany(mappedBy = "match")
-	private Set<Bet> sum;
+	private List<Bet> sum;
 
 	@OneToOne(mappedBy = "game")
 	private Results result;

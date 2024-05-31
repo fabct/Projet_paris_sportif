@@ -18,5 +18,5 @@ public class ResultsGameDto {
     private Double sidevic2;
     private Double tie;
     private List<GameTeamDto> teams;
-    private Set<ResultsGameBetDto> sum;
+    private List<ResultsGameBetDto> sum;
 }
