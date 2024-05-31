@@ -1,15 +1,11 @@
-package com.projet_paris_sportif.dto;
+package com.projet_paris_sportif.dto.result;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
-public class ResultsDto {
+public class ResultResponseDTO{
     private Integer idResult;
     private Boolean resultVicTeam1;
     private Boolean resultVicTeam2;

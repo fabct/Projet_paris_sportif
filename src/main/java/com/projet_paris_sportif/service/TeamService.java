@@ -1,12 +1,9 @@
 package com.projet_paris_sportif.service;
 
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
-import com.projet_paris_sportif.dto.CreateTeamDto;
-import com.projet_paris_sportif.dto.GetTeamDto;
-import com.projet_paris_sportif.dto.TeamGameDto;
 import com.projet_paris_sportif.dto.team.TeamRequestDTO;
+import com.projet_paris_sportif.dto.team.TeamResponseDTO;
 import com.projet_paris_sportif.mapper.TeamMapper;
-import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.model.Team;
 import com.projet_paris_sportif.repository.TeamRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -23,51 +20,28 @@ public class TeamService {
     @Autowired
     private TeamMapper teamMapper;
 
-    public CreateTeamDto createTeam(TeamRequestDTO team) {
-
-        return convertCreateTeamToDto(teamRepository.save(team));
+    public TeamResponseDTO createTeam(TeamRequestDTO teamRequestDTO) {
+        final Team team = teamMapper.TeamRequestDTOToTeam(teamRequestDTO);
+        final Team response = teamRepository.save(team);
+        return teamMapper.TeamToTeamResponseDTO(response);
     }
 
-    public GetTeamDto deleteTeam(Integer id) throws ResourceNotFoundException {
+    public TeamResponseDTO deleteTeam(Integer id) throws ResourceNotFoundException {
         Team teamDeleted = teamRepository.getReferenceById(id);
         teamRepository.delete(teamDeleted);
-        return convertGetTeamToDto(teamRepository.findById(id)
+        return teamMapper.TeamToTeamResponseDTO(teamRepository.findById(id)
                 .orElseThrow(
                         () -> new ResourceNotFoundException("Cette équipe n'existe pas ou a bien été supprimée !")));
     }
 
-    public GetTeamDto getTeam(Integer id) throws ResourceNotFoundException {
-        return convertGetTeamToDto(teamRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Cette équipe n'existe pas !")));
+    public TeamResponseDTO getTeam(Integer id) throws ResourceNotFoundException {
+        final Team team = teamRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Cette équipe n'existe pas !"));
+        return teamMapper.TeamToTeamResponseDTO(team);
     }
 
-    public List<GetTeamDto> getAllTeams() {
-        return teamRepository.findAll().stream().map(this::convertGetTeamToDto).collect(Collectors.toList());
-    }
-
-    public CreateTeamDto convertCreateTeamToDto(Team t) {
-        return CreateTeamDto.builder()
-                .idTeam(t.getIdTeam())
-                .teamname(t.getTeamname())
-                .build();
-    }
-
-    public GetTeamDto convertGetTeamToDto(Team t) {
-        return GetTeamDto.builder()
-                .idTeam(t.getIdTeam())
-                .teamname(t.getTeamname())
-                .matchs(t.getMatchs().stream().map(this::convertTeamGameToDto).collect(Collectors.toList()))
-                .build();
-    }
-
-    public TeamGameDto convertTeamGameToDto(Game g) {
-        return TeamGameDto.builder()
-                .idMatch(g.getIdMatch())
-                .sidevic1(g.getSidevic1())
-                .sidevic2(g.getSidevic2())
-                .tie(g.getTie())
-                .sum(g.getSum())
-                .result(g.getResult())
-                .build();
+    public List<TeamResponseDTO> getAllTeams() {
+        final List<Team> teams = teamRepository.findAll();
+        return teams.stream().map(teamMapper::TeamToTeamResponseDTO).collect(Collectors.toList());
     }
 }

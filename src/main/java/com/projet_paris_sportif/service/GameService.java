@@ -1,9 +1,11 @@
 package com.projet_paris_sportif.service;
 
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
-import com.projet_paris_sportif.dto.game.GameDto;
+import com.projet_paris_sportif.dto.game.GameRequestDTO;
+import com.projet_paris_sportif.dto.game.GameResponseDTO;
 import com.projet_paris_sportif.dto.game.GameResultsDto;
 import com.projet_paris_sportif.dto.game.GameTeamDto;
+import com.projet_paris_sportif.mapper.GameMapper;
 import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.model.Results;
 import com.projet_paris_sportif.model.Team;
@@ -19,56 +21,30 @@ public class GameService {
 
     @Autowired
     private GameRepository gameRepository;
+    @Autowired
+    private GameMapper gameMapper;
 
-    public List<GameDto> getAllGame() {
+    public List<GameResponseDTO> getAllGame() {
         return gameRepository.findAll().stream()
-                .map(this::convertGameToDto)
+                .map(gameMapper::GameToGameResponseDTO)
                 .collect(Collectors.toList());
     }
 
-    public GameDto getGame(Integer id) throws ResourceNotFoundException {
-        return convertGameToDto(gameRepository.findById(id)
+    public GameResponseDTO getGame(Integer id) throws ResourceNotFoundException {
+        return gameMapper.GameToGameResponseDTO(gameRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ce match n'existe pas !")));
     }
 
-    public GameDto createGame(Game game) {
-        return convertGameToDto(gameRepository.save(game));
+    public GameResponseDTO createGame(GameRequestDTO gameRequestDTO) {
+        final Game game = gameMapper.GameRequestDTOToGame(gameRequestDTO);
+        final Game response = gameRepository.save(game);
+        return gameMapper.GameToGameResponseDTO(response);
     }
 
-    public GameDto deleteGame(Integer id) throws ResourceNotFoundException {
+    public GameResponseDTO deleteGame(Integer id) throws ResourceNotFoundException {
         Game gameDelete = gameRepository.getReferenceById(id);
         gameRepository.delete(gameDelete);
-        return convertGameToDto(gameRepository.findById(id)
+        return gameMapper.GameToGameResponseDTO(gameRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ce match n'existe pas ou a bien été supprimé !")));
-    }
-
-    public GameDto convertGameToDto(Game g) {
-        return GameDto.builder()
-                .idMatch(g.getIdMatch())
-                .sidevic1(g.getSidevic1())
-                .sidevic2(g.getSidevic2())
-                .tie(g.getTie())
-                .teams(g.getTeams().stream().map(this::convertTeamBetToDto).collect(Collectors.toList()))
-                .sum(g.getSum())
-                .result(convertGameResultsToDto(g.getResult()))
-                .build();
-    }
-
-    public GameTeamDto convertTeamBetToDto(Team t) {
-        return GameTeamDto.builder()
-                .idTeam(t.getIdTeam())
-                .teamname(t.getTeamname())
-                .build();
-    }
-
-    public GameResultsDto convertGameResultsToDto(Results r) {
-        if (r == null)
-            return null;
-        return GameResultsDto.builder()
-                .idResult(r.getIdResult())
-                .resultVicTeam1(r.getResultVicTeam1())
-                .resultVicTeam2(r.getResultVicTeam2())
-                .resultTie(r.getResultTie())
-                .build();
     }
 }

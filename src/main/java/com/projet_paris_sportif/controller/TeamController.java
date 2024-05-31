@@ -1,8 +1,7 @@
 package com.projet_paris_sportif.controller;
 
-import com.projet_paris_sportif.dto.CreateTeamDto;
-import com.projet_paris_sportif.dto.GetTeamDto;
-import com.projet_paris_sportif.model.Team;
+import com.projet_paris_sportif.dto.team.TeamRequestDTO;
+import com.projet_paris_sportif.dto.team.TeamResponseDTO;
 import com.projet_paris_sportif.service.TeamService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
@@ -17,22 +16,22 @@ public class TeamController extends Exception {
     public TeamService teamService;
 
     @GetMapping("/allTeams")
-    public List<GetTeamDto> getAllTeams() {
+    public List<TeamResponseDTO> getAllTeams() {
         return teamService.getAllTeams();
     }
 
     @GetMapping("/team")
-    public GetTeamDto getTeam(@RequestParam Integer id) throws ResourceNotFoundException {
+    public TeamResponseDTO getTeam(@RequestParam Integer id) throws ResourceNotFoundException {
         return teamService.getTeam(id);
     }
 
     @PostMapping("/team")
-    public CreateTeamDto createTeam(@RequestBody Team team) {
+    public TeamResponseDTO createTeam(@RequestBody TeamRequestDTO team) {
         return teamService.createTeam(team);
     }
 
     @DeleteMapping("/team")
-    public GetTeamDto deleteTeam(@RequestParam Integer id) throws ResourceNotFoundException {
+    public TeamResponseDTO deleteTeam(@RequestParam Integer id) throws ResourceNotFoundException {
         return teamService.deleteTeam(id);
     }
 }

@@ -1,6 +1,6 @@
 package com.projet_paris_sportif.controller;
 
-import com.projet_paris_sportif.dto.bet.BetDto;
+import com.projet_paris_sportif.dto.bet.BetResponseDTO;
 import com.projet_paris_sportif.model.Bet;
 import com.projet_paris_sportif.model.BetKey;
 import com.projet_paris_sportif.service.BetService;
@@ -17,22 +17,22 @@ public class BetController extends Exception {
     private BetService betService;
 
     @GetMapping("/userBets")
-    public List<BetDto> getUserBet(@RequestParam Integer userId) {
+    public List<BetResponseDTO> getUserBet(@RequestParam Integer userId) {
         return betService.getUserBets(userId);
     }
 
     @GetMapping("/bet")
-    public BetDto getBet(@RequestParam BetKey id) throws ResourceNotFoundException {
+    public BetResponseDTO getBet(@RequestParam BetKey id) throws ResourceNotFoundException {
         return betService.getBet(id);
     }
 
     @PostMapping("/bet")
-    public BetDto createBet(@RequestBody Bet bet) {
+    public BetResponseDTO createBet(@RequestBody Bet bet) {
         return betService.createBet(bet);
     }
 
     @DeleteMapping("/bet")
-    public BetDto cancelBet(BetKey id) throws ResourceNotFoundException {
+    public BetResponseDTO cancelBet(BetKey id) throws ResourceNotFoundException {
         return betService.cancelBet(id);
     }
 }

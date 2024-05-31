@@ -12,6 +12,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {
@@ -50,6 +51,6 @@ public class UserService {
 
     public List<UserResponseDTO> getAllUsers() {
         final List<User> user = userRepository.findAll();
-        return userMapper.ListUserToListUserResponseDTO(user);
+        return user.stream().map(userMapper::userToUserResponseDTO).collect(Collectors.toList());
     }
 }

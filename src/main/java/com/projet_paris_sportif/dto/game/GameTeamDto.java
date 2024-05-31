@@ -1,14 +1,10 @@
 package com.projet_paris_sportif.dto.game;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
 @Data
 @NoArgsConstructor
-@AllArgsConstructor
-@Builder
 public class GameTeamDto {
     private Integer idTeam;
     private String teamname;

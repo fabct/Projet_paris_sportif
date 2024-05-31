@@ -1,4 +1,4 @@
-package com.projet_paris_sportif.dto;
+package com.projet_paris_sportif.dto.result;
 
 import java.util.List;
 

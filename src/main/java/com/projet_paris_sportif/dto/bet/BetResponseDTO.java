@@ -1,6 +1,6 @@
 package com.projet_paris_sportif.dto.bet;
 
-import com.projet_paris_sportif.dto.game.GameDto;
+import com.projet_paris_sportif.dto.game.GameResponseDTO;
 import com.projet_paris_sportif.model.BetKey;
 import com.projet_paris_sportif.model.User;
 
@@ -13,9 +13,9 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class BetDto {
+public class BetResponseDTO {
     private BetKey id;
     private User user;
-    private GameDto game;
+    private GameResponseDTO game;
     private Integer sum;
 }

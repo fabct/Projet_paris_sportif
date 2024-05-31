@@ -1,16 +1,10 @@
 package com.projet_paris_sportif.service;
 
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
-import com.projet_paris_sportif.dto.bet.BetUserDto;
-import com.projet_paris_sportif.dto.game.GameTeamDto;
-import com.projet_paris_sportif.dto.ResultsDto;
-import com.projet_paris_sportif.dto.ResultsGameBetDto;
-import com.projet_paris_sportif.dto.ResultsGameDto;
-import com.projet_paris_sportif.model.Bet;
-import com.projet_paris_sportif.model.Game;
+import com.projet_paris_sportif.dto.result.ResultResponseDTO;
+import com.projet_paris_sportif.dto.result.ResultResquestDTO;
+import com.projet_paris_sportif.mapper.ResultMapper;
 import com.projet_paris_sportif.model.Results;
-import com.projet_paris_sportif.model.Team;
-import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.repository.ResultsRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,66 +17,30 @@ public class ResultsService {
     @Autowired
     private ResultsRepository resultsRepository;
 
-    public ResultsDto createResult(Results results) {
-        return convertResultsToDto(resultsRepository.save(results));
+    @Autowired
+    private ResultMapper resultMapper;
+
+    public ResultResponseDTO createResult(ResultResquestDTO resultResquestDTO) {
+        final Results results = resultMapper.ResultResquestDTOToResults(resultResquestDTO);
+        final Results response = resultsRepository.save(results);
+        return resultMapper.ResultToResultResponseDTO(response);
     }
 
-    public ResultsDto getResult(Integer id) throws ResourceNotFoundException {
-        return convertResultsToDto(resultsRepository.findById(id)
-                .orElseThrow(() -> new ResourceNotFoundException("Ce résultat n'existe pas !")));
+    public ResultResponseDTO getResult(Integer id) throws ResourceNotFoundException {
+        final Results results = resultsRepository.findById(id)
+                .orElseThrow(() -> new ResourceNotFoundException("Ce résultat n'existe pas !"));
+        return resultMapper.ResultToResultResponseDTO(results);
     }
 
-    public List<ResultsDto> getAllResults() {
-        return resultsRepository.findAll().stream()
-                .map(this::convertResultsToDto).collect(Collectors.toList());
+    public List<ResultResponseDTO> getAllResults() {
+        final List<Results> results =resultsRepository.findAll();
+        return results.stream().map(resultMapper::ResultToResultResponseDTO).collect(Collectors.toList());
     }
 
-    public ResultsDto deleteResult(Integer id) throws ResourceNotFoundException {
+    public ResultResponseDTO deleteResult(Integer id) throws ResourceNotFoundException {
         Results resultDelete = resultsRepository.getReferenceById(id);
         resultsRepository.delete(resultDelete);
-        return convertResultsToDto(resultsRepository.findById(id)
+        return resultMapper.ResultToResultResponseDTO(resultsRepository.findById(id)
                 .orElseThrow(() -> new ResourceNotFoundException("Ce résultat n'existe pas ou a bien été supprimé !")));
-    }
-
-    public ResultsDto convertResultsToDto(Results r) {
-        return ResultsDto.builder()
-                .idResult(r.getIdResult())
-                .resultVicTeam1(r.getResultVicTeam1())
-                .resultVicTeam2(r.getResultVicTeam2())
-                .resultTie(r.getResultTie())
-                .game(convertResultsGameToDto(r.getGame()))
-                .build();
-    }
-
-    public ResultsGameDto convertResultsGameToDto(Game g) {
-        return ResultsGameDto.builder()
-                .idMatch(g.getIdMatch())
-                .sidevic1(g.getSidevic1())
-                .sidevic2(g.getSidevic2())
-                .tie(g.getTie())
-                .teams(g.getTeams().stream().map(this::convertTeamBetToDto).collect(Collectors.toList()))
-                .sum((g.getSum().stream().map(this::convertResultsGameBetToDto).collect(Collectors.toList())))
-                .build();
-    }
-
-    public GameTeamDto convertTeamBetToDto(Team t) {
-        return GameTeamDto.builder()
-                .idTeam(t.getIdTeam())
-                .teamname(t.getTeamname())
-                .build();
-    }
-
-    public ResultsGameBetDto convertResultsGameBetToDto(Bet b) {
-        return ResultsGameBetDto.builder()
-                .id(b.getId())
-                .user(convertBetUserToDto(b.getUser()))
-                .sum(b.getSum())
-                .build();
-    }
-
-    public BetUserDto convertBetUserToDto(User u) {
-        return BetUserDto.builder()
-                .solde(u.getSolde())
-                .build();
     }
 }
