@@ -49,7 +49,6 @@ public class GameService {
                 .sidevic2(g.getSidevic2())
                 .tie(g.getTie())
                 .teams(g.getTeams().stream().map(this::convertTeamBetToDto).collect(Collectors.toList()))
-                .sum(g.getSum())
                 .result(convertGameResultsToDto(g.getResult()))
                 .build();
     }

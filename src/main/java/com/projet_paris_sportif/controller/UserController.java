@@ -6,6 +6,7 @@ import com.projet_paris_sportif.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class UserController extends Exception {
 
@@ -22,7 +23,6 @@ public class UserController extends Exception {
         return userService.createUser(user);
     }
 
-    @CrossOrigin(origins = "*")
     @PostMapping("/login")
     public Integer login(@RequestBody LoginDto login)
             throws ResourceNotFoundException {
