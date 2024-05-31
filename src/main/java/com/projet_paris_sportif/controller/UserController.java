@@ -21,6 +21,7 @@ public class UserController extends Exception {
         return userService.createUser(user);
     }
 
+    @CrossOrigin(origins = "http://127.0.0.1:5500")
     @PostMapping("/login")
     public Boolean login(@RequestParam String username, @RequestParam String password)
             throws ResourceNotFoundException {

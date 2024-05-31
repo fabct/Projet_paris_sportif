@@ -1,12 +1,14 @@
 package com.projet_paris_sportif.service;
 
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
+import com.projet_paris_sportif.dto.UserDto;
 import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.Objects;
+import java.util.stream.Collectors;
 
 @Service
 public class UserService {

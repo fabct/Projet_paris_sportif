@@ -4,7 +4,7 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.OneToMany;
 import lombok.Data;
 
-import java.util.Set;
+import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonIgnoreProperties;
 
@@ -16,5 +16,5 @@ public class User extends InfUser {
 	private Integer solde;
 
 	@OneToMany(mappedBy = "user")
-	private Set<Bet> sum;
+	private List<Bet> sum;
 }
