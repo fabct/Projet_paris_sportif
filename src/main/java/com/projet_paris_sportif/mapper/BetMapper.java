@@ -26,7 +26,6 @@ public interface BetMapper {
     @Mapping(source = "sidevic2", target = "sidevic2")
     @Mapping(source = "tie", target = "tie")
     @Mapping(source = "teams", target = "teams")
-    @Mapping(source = "sum", target = "sum")
     @Mapping(source = "result", target = "result")
     GameResponseDTO GameToGameResponseDTO(Game game);
 

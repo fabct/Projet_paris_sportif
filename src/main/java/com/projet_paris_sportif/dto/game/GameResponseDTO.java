@@ -15,6 +15,5 @@ public class GameResponseDTO{
     private Double tie;
     private Integer idMatch;
     private List<GameTeamDto> teams;
-    private List<Bet> sum;
     private GameResultsDto result;
 }

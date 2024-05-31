@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.dto.user;
 
+import com.projet_paris_sportif.dto.bet.BetUserDto;
 import com.projet_paris_sportif.model.Bet;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -12,4 +13,5 @@ import java.util.List;
 @NoArgsConstructor
 public class UserResponseDTO extends UserRequestDTO{
     private Integer id;
+    private List<UserBetDTO> bets;
 }

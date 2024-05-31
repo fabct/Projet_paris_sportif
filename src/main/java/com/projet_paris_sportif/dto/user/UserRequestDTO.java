@@ -17,5 +17,4 @@ public class UserRequestDTO {
     private String birthyear;
     private String role;
     private Integer solde;
-    private List<Bet> sum;
 }

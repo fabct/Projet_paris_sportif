@@ -20,7 +20,6 @@ public interface GameMapper {
 
     @Mapping(source = "idMatch", target = "idMatch")
     @Mapping(source = "teams", target = "teams")
-    @Mapping(source = "sum", target = "sum")
     @Mapping(source = "result", target = "result")
     GameResponseDTO GameToGameResponseDTO(Game game);
 
@@ -31,8 +30,6 @@ public interface GameMapper {
     @Mapping(source = "idTeam", target = "idTeam")
     @Mapping(source = "teamname", target = "teamname")
     GameTeamDto teamToGameTeamDto(Team team);
-
-    List<Bet> sumToBetDtos(List<Bet> sum);
 
     Bet betToBetDto(Bet bet);
 

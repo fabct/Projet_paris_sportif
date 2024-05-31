@@ -16,5 +16,5 @@ public class User extends InfUser {
 	private Integer solde;
 
 	@OneToMany(mappedBy = "user")
-	private List<Bet> sum;
+	private List<Bet> bets;
 }
