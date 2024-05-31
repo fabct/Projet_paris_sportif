@@ -4,6 +4,8 @@ import com.projet_paris_sportif.controller.ResourceNotFoundException;
 import com.projet_paris_sportif.dto.CreateTeamDto;
 import com.projet_paris_sportif.dto.GetTeamDto;
 import com.projet_paris_sportif.dto.TeamGameDto;
+import com.projet_paris_sportif.dto.team.TeamRequestDTO;
+import com.projet_paris_sportif.mapper.TeamMapper;
 import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.model.Team;
 import com.projet_paris_sportif.repository.TeamRepository;
@@ -18,7 +20,11 @@ public class TeamService {
     @Autowired
     private TeamRepository teamRepository;
 
-    public CreateTeamDto createTeam(Team team) {
+    @Autowired
+    private TeamMapper teamMapper;
+
+    public CreateTeamDto createTeam(TeamRequestDTO team) {
+
         return convertCreateTeamToDto(teamRepository.save(team));
     }
 

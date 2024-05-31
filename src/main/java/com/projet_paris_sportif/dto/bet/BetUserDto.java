@@ -1,4 +1,4 @@
-package com.projet_paris_sportif.dto;
+package com.projet_paris_sportif.dto.bet;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -9,7 +9,6 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class LoginDto {
-    private String username;
-    private String password;
+public class BetUserDto {
+    private Integer solde;
 }

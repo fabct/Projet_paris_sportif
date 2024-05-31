@@ -1,5 +1,6 @@
 package com.projet_paris_sportif.dto;
 
+import com.projet_paris_sportif.dto.bet.BetUserDto;
 import com.projet_paris_sportif.model.BetKey;
 
 import lombok.AllArgsConstructor;

@@ -1,5 +1,6 @@
-package com.projet_paris_sportif.dto;
+package com.projet_paris_sportif.dto.bet;
 
+import com.projet_paris_sportif.dto.game.GameDto;
 import com.projet_paris_sportif.model.BetKey;
 import com.projet_paris_sportif.model.User;
 

@@ -1,6 +1,6 @@
 package com.projet_paris_sportif.controller;
 
-import com.projet_paris_sportif.dto.GameDto;
+import com.projet_paris_sportif.dto.game.GameDto;
 import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.service.GameService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class GameController extends Exception {
 

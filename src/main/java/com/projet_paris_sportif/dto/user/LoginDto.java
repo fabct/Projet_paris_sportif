@@ -1,6 +1,4 @@
-package com.projet_paris_sportif.dto;
-
-import java.util.List;
+package com.projet_paris_sportif.dto.user;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -11,7 +9,7 @@ import lombok.NoArgsConstructor;
 @NoArgsConstructor
 @AllArgsConstructor
 @Builder
-public class UserDto {
-    private Integer solde;
-    private List<UserBetDto> sum;
+public class LoginDto {
+    private String username;
+    private String password;
 }

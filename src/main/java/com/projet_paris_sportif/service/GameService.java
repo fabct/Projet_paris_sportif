@@ -1,9 +1,9 @@
 package com.projet_paris_sportif.service;
 
 import com.projet_paris_sportif.controller.ResourceNotFoundException;
-import com.projet_paris_sportif.dto.GameDto;
-import com.projet_paris_sportif.dto.GameResultsDto;
-import com.projet_paris_sportif.dto.GameTeamDto;
+import com.projet_paris_sportif.dto.game.GameDto;
+import com.projet_paris_sportif.dto.game.GameResultsDto;
+import com.projet_paris_sportif.dto.game.GameTeamDto;
 import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.model.Results;
 import com.projet_paris_sportif.model.Team;

@@ -1,6 +1,6 @@
 package com.projet_paris_sportif.controller;
 
-import com.projet_paris_sportif.dto.BetDto;
+import com.projet_paris_sportif.dto.bet.BetDto;
 import com.projet_paris_sportif.model.Bet;
 import com.projet_paris_sportif.model.BetKey;
 import com.projet_paris_sportif.service.BetService;
@@ -9,6 +9,7 @@ import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
 
+@CrossOrigin(origins = "*")
 @RestController
 public class BetController extends Exception {
 

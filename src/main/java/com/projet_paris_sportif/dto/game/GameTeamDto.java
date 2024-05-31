@@ -1,4 +1,4 @@
-package com.projet_paris_sportif.dto;
+package com.projet_paris_sportif.dto.game;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

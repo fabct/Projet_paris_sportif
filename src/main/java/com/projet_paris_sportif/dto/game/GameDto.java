@@ -1,10 +1,8 @@
-package com.projet_paris_sportif.dto;
+package com.projet_paris_sportif.dto.game;
 
 import java.util.List;
-import java.util.Set;
 
 import com.projet_paris_sportif.model.Bet;
-import com.projet_paris_sportif.model.Results;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

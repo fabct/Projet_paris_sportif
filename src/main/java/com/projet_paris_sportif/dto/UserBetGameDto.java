@@ -2,6 +2,8 @@ package com.projet_paris_sportif.dto;
 
 import java.util.List;
 
+import com.projet_paris_sportif.dto.game.GameResultsDto;
+import com.projet_paris_sportif.dto.game.GameTeamDto;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
