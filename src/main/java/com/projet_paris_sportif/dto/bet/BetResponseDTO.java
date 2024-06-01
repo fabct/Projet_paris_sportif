@@ -15,7 +15,6 @@ import lombok.NoArgsConstructor;
 @Builder
 public class BetResponseDTO {
     private BetKey id;
-    private User user;
     private GameResponseDTO game;
     private Integer sum;
 }

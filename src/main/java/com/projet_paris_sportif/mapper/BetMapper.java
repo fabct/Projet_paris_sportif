@@ -16,7 +16,6 @@ public interface BetMapper {
     BetMapper INSTANCE = Mappers.getMapper(BetMapper.class);
 
     @Mapping(source = "id", target = "id")
-    @Mapping(source = "user", target = "user")
     @Mapping(source = "match", target = "game")
     @Mapping(source = "sum", target = "sum")
     BetResponseDTO BetToBetResponseDTO(Bet bet);
@@ -51,4 +50,3 @@ public interface BetMapper {
                 .collect(Collectors.toList());
     }
 }
-
