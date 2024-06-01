@@ -10,6 +10,8 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
+import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.RequestBody;
 
 @CrossOrigin(origins = "*")
 @RestController
@@ -48,4 +50,10 @@ public class UserController extends Exception {
     public User deleteUser(@RequestParam Integer id) throws ResourceNotFoundException {
         return userService.deleteUser(id);
     }
+
+    @PostMapping("/addFunds")
+    public Integer addFunds(@RequestParam Integer userId, @RequestParam Integer amount) {
+        return userService.addFunds(userId, amount);
+    }
+
 }

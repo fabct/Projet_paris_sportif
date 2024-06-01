@@ -65,4 +65,13 @@ public class UserService {
         final List<User> user = userRepository.findAll();
         return user.stream().map(userMapper::userToUserResponseDTO).collect(Collectors.toList());
     }
+
+    public Integer addFunds(Integer userId, Integer amount) {
+        User user = userRepository.findById(userId).get();
+        Integer solde = user.getSolde();
+        Integer newSolde = solde + amount;
+        user.setSolde(newSolde);
+        userRepository.save(user);
+        return amount;
+    }
 }
