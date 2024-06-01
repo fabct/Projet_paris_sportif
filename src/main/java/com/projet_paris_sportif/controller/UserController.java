@@ -3,6 +3,7 @@ package com.projet_paris_sportif.controller;
 import com.projet_paris_sportif.dto.user.UserRequestDTO;
 import com.projet_paris_sportif.dto.user.UserResponseDTO;
 import com.projet_paris_sportif.dto.user.LoginDto;
+import com.projet_paris_sportif.model.InfUser;
 import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.service.UserService;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -30,6 +31,11 @@ public class UserController extends Exception {
     @PostMapping("/user")
     public UserResponseDTO createUser(@RequestBody UserRequestDTO user) {
         return userService.createUser(user);
+    }
+
+    @PostMapping("/modifyUser")
+    public void modifyUser(@RequestBody InfUser infUser) {
+        userService.modifyUser(infUser);
     }
 
     @PostMapping("/login")

@@ -11,7 +11,7 @@ public class InfUserController extends Exception {
     @Autowired
     private InfUserService infUserService;
 
-    @PostMapping("/InfUser")
+    @PostMapping("/infUser")
     public InfUser updateInfUser(@RequestBody InfUser infUser) {
         return infUserService.updateInfUser(infUser);
     }

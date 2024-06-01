@@ -5,6 +5,7 @@ import com.projet_paris_sportif.dto.user.LoginDto;
 import com.projet_paris_sportif.dto.user.UserRequestDTO;
 import com.projet_paris_sportif.dto.user.UserResponseDTO;
 import com.projet_paris_sportif.mapper.UserMapper;
+import com.projet_paris_sportif.model.InfUser;
 import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.repository.UserRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Objects;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
@@ -26,6 +28,16 @@ public class UserService {
         final User user = userMapper.userRequestDTOToUser(userRequestDTO);
         final User response = userRepository.save(user);
         return userMapper.userToUserResponseDTO(response);
+    }
+
+    public void modifyUser(InfUser infUser) {
+        final User user = userRepository.getReferenceById(infUser.getId());
+        user.setBirthyear(infUser.getBirthyear());
+        user.setName(infUser.getName());
+        user.setSurname(infUser.getSurname());
+        user.setPassword(infUser.getPassword());
+        user.setRole(infUser.getRole());
+        userRepository.save(user);
     }
 
     public User deleteUser(Integer id) throws ResourceNotFoundException {

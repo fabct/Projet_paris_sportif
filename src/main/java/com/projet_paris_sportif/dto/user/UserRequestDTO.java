@@ -11,7 +11,7 @@ import java.util.List;
 @Data
 @NoArgsConstructor
 public class UserRequestDTO {
-    private String username;
+    private String name;
     private String surname;
     private String password;
     private String birthyear;
