@@ -11,7 +11,10 @@ import com.projet_paris_sportif.model.BetKey;
 import com.projet_paris_sportif.model.Game;
 import com.projet_paris_sportif.model.Results;
 import com.projet_paris_sportif.model.Team;
+import com.projet_paris_sportif.model.User;
 import com.projet_paris_sportif.repository.BetRepository;
+import com.projet_paris_sportif.repository.UserRepository;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -24,9 +27,19 @@ public class BetService {
     private BetRepository betRepository;
 
     @Autowired
+    private UserRepository userRepository;
+
+    @Autowired
     private BetMapper betMapper;
 
     public BetResponseDTO createBet(Bet bet) {
+        Integer currentAmount = betRepository.findById(bet.getId()).get().getSum();
+        Integer newAmount = bet.getSum();
+        User user = userRepository.findById(bet.getUser().getId()).get();
+        Integer solde = user.getSolde();
+        Integer newSolde = solde + currentAmount - newAmount;
+        user.setSolde(newSolde);
+        userRepository.save(user);
 
         return betMapper.BetToBetResponseDTO(betRepository.save(bet));
     }
