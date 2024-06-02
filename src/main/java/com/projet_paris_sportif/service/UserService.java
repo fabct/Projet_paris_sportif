@@ -26,6 +26,8 @@ public class UserService {
 
     public void createUser(UserRequestDTO userRequestDTO) {
         final User user = userMapper.userRequestDTOToUser(userRequestDTO);
+        user.setSolde(0);
+        user.setRole("user");
         userRepository.save(user);
     }
 

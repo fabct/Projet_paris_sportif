@@ -33,11 +33,16 @@ public class BetService {
     private BetMapper betMapper;
 
     public BetResponseDTO createBet(Bet bet) {
-        Integer currentAmount = betRepository.findById(bet.getId()).get().getSum();
-        Integer newAmount = bet.getSum();
         User user = userRepository.findById(bet.getUser().getId()).get();
         Integer solde = user.getSolde();
-        Integer newSolde = solde + currentAmount - newAmount;
+        Integer newSolde = 0;
+        Integer betAmount = bet.getSum();
+        if (!betRepository.findById(bet.getId()).isEmpty()) {
+            Integer currentBetAmount = betRepository.findById(bet.getId()).get().getSum();
+            newSolde = solde + currentBetAmount - betAmount;
+        } else {
+            newSolde = solde - betAmount;
+        }
         user.setSolde(newSolde);
         userRepository.save(user);
 
