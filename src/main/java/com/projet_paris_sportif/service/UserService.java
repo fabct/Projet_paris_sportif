@@ -24,10 +24,9 @@ public class UserService {
     @Autowired
     private UserMapper userMapper;
 
-    public UserResponseDTO createUser(UserRequestDTO userRequestDTO) {
+    public void createUser(UserRequestDTO userRequestDTO) {
         final User user = userMapper.userRequestDTOToUser(userRequestDTO);
-        final User response = userRepository.save(user);
-        return userMapper.userToUserResponseDTO(response);
+        userRepository.save(user);
     }
 
     public void modifyUser(InfUser infUser) {

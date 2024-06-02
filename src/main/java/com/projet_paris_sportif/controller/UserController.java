@@ -31,8 +31,8 @@ public class UserController extends Exception {
     }
 
     @PostMapping("/user")
-    public UserResponseDTO createUser(@RequestBody UserRequestDTO user) {
-        return userService.createUser(user);
+    public void createUser(@RequestBody UserRequestDTO user) {
+        userService.createUser(user);
     }
 
     @PostMapping("/modifyUser")
