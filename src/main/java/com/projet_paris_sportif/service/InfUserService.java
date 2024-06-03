@@ -17,12 +17,4 @@ public class InfUserService {
     public InfUser updateInfUser(InfUser infUser) {
         return infUserRepository.save(infUser);
     }
-
-    public InfUser deleteInfUser(Integer id) throws ResourceNotFoundException {
-        InfUser infUser = infUserRepository.getReferenceById(id);
-        infUserRepository.delete(infUser);
-        return infUserRepository.findById(id).orElseThrow(
-                () -> new ResourceNotFoundException(
-                        "Les informations de l'utilisateur n'existent pas ou ont bien été supprimées !"));
-    }
 }
